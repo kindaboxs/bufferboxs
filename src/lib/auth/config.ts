@@ -45,7 +45,8 @@ export const authConfig = {
 	},
 	emailAndPassword: {
 		enabled: true,
-		// requireEmailVerification: true,
+		minPasswordLength: 6,
+		maxPasswordLength: 128,
 	},
 	account: {
 		accountLinking: {

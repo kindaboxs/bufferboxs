@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 
 import "@/styles/globals.css";
 
+import { Toaster } from "sonner";
+
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { geistMono, geistSans } from "@/lib/fonts";
 
@@ -30,6 +32,7 @@ export default function RootLayout({
 				>
 					{children}
 				</ThemeProvider>
+				<Toaster position="top-center" richColors />
 			</body>
 		</html>
 	);

@@ -13,7 +13,7 @@ export const signUpSchema = z.object({
 	password: z
 		.string()
 		.min(6, { message: "Password must be at least 6 characters" })
-		.max(50, { message: "Password must be at most 50 characters" }),
+		.max(128, { message: "Password must be at most 128 characters" }),
 });
 
 export type signUpSchemaType = z.infer<typeof signUpSchema>;

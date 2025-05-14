@@ -5,6 +5,7 @@ import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 import {
 	signUpSchema,
@@ -42,7 +43,6 @@ export const SignUpForm = () => {
 			username: data.username,
 			email: data.email,
 			password: data.password,
-			callbackURL: "/",
 			fetchOptions: {
 				onRequest: () => {
 					setLoading(true);
@@ -55,6 +55,7 @@ export const SignUpForm = () => {
 				},
 				onError: (ctx) => {
 					setLoading(false);
+					toast.error(ctx.error.message, { id: ctx.error.status });
 					console.log(ctx);
 				},
 			},
