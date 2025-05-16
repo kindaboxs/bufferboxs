@@ -47,6 +47,7 @@ export const authConfig = {
 		enabled: true,
 		minPasswordLength: 6,
 		maxPasswordLength: 128,
+		autoSignIn: false,
 	},
 	account: {
 		accountLinking: {

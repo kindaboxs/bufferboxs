@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
@@ -26,6 +27,8 @@ import { signIn } from "@/lib/auth/client";
 export const SignInForm = () => {
 	const [loading, setLoading] = useState<boolean>(false);
 
+	const router = useRouter();
+
 	const form = useForm<signInSchemaType>({
 		resolver: zodResolver(signInSchema),
 		defaultValues: {
@@ -47,7 +50,11 @@ export const SignInForm = () => {
 					setLoading(false);
 				},
 				onSuccess: () => {
+					router.push("/");
 					form.reset();
+					toast.success("Signed in successfully.", {
+						id: "sign-in-success",
+					});
 				},
 				onError: (ctx) => {
 					setLoading(false);
