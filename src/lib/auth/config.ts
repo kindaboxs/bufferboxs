@@ -15,6 +15,7 @@ import {
 
 import { APP_NAME } from "@/configs";
 import { env } from "@/env";
+import { hashPassword, verifyPassword } from "@/lib/argon2";
 import { db } from "@/lib/db";
 
 export const authConfig = {
@@ -47,6 +48,11 @@ export const authConfig = {
 		enabled: true,
 		minPasswordLength: 6,
 		maxPasswordLength: 128,
+		autoSignIn: false,
+		password: {
+			hash: (password) => hashPassword(password),
+			verify: (data) => verifyPassword(data),
+		},
 	},
 	account: {
 		accountLinking: {
@@ -74,4 +80,9 @@ export const authConfig = {
 		oAuthProxy(),
 	],
 	secret: env.BETTER_AUTH_SECRET,
+	advanced: {
+		database: {
+			generateId: false,
+		},
+	},
 } satisfies BetterAuthOptions;

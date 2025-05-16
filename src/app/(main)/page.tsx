@@ -7,7 +7,7 @@ import { auth } from "@/lib/auth";
 export default async function HomePage() {
 	const session = await auth.api.getSession({ headers: await getHeaders() });
 
-	redirect("/get-out");
+	if (!session) redirect("/get-out");
 
 	return (
 		<div>
