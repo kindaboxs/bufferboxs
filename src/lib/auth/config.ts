@@ -75,4 +75,9 @@ export const authConfig = {
 		oAuthProxy(),
 	],
 	secret: env.BETTER_AUTH_SECRET,
+	advanced: {
+		database: {
+			generateId: false,
+		},
+	},
 } satisfies BetterAuthOptions;
