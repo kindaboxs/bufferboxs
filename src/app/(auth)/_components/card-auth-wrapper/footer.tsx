@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { CardFooter } from "@/components/ui/card";
@@ -8,8 +11,11 @@ export const CardAuthWrapperFooter = ({
 }: {
 	isSignUp?: boolean;
 }) => {
+	const searchParams = useSearchParams();
+	const redirect_to = searchParams.get("redirect_to");
+
 	return (
-		<CardFooter>
+		<CardFooter className="flex-col">
 			<div className="flex w-full items-center justify-center">
 				{isSignUp ? (
 					<>
@@ -22,7 +28,15 @@ export const CardAuthWrapperFooter = ({
 							className="ml-1 cursor-pointer p-0"
 							asChild
 						>
-							<Link href="/sign-in">Sign In</Link>
+							<Link
+								href={
+									redirect_to
+										? `/sign-in?redirect_to=${encodeURIComponent(redirect_to)}`
+										: "/sign-in"
+								}
+							>
+								Sign In
+							</Link>
 						</Button>
 					</>
 				) : (
@@ -36,7 +50,15 @@ export const CardAuthWrapperFooter = ({
 							className="ml-1 cursor-pointer p-0"
 							asChild
 						>
-							<Link href="/sign-up">Sign Up</Link>
+							<Link
+								href={
+									redirect_to
+										? `/sign-up?redirect_to=${encodeURIComponent(redirect_to)}`
+										: "/sign-up"
+								}
+							>
+								Sign Up
+							</Link>
 						</Button>
 					</>
 				)}
