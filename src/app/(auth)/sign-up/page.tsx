@@ -1,6 +1,9 @@
+import { Suspense } from "react";
+
 import { CardAuthWrapper } from "@/app/(auth)/_components/card-auth-wrapper";
 import { SignUpForm } from "@/app/(auth)/_components/sign-up-form";
 import { SignUpFormServer } from "@/app/(auth)/_components/sign-up-form-server";
+import { SignUpFormSkeleton } from "@/app/(auth)/_components/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function SignUpPage() {
@@ -32,7 +35,9 @@ export default function SignUpPage() {
 const SignUpClient = () => {
 	return (
 		<CardAuthWrapper isSignUp>
-			<SignUpForm />
+			<Suspense fallback={<SignUpFormSkeleton />}>
+				<SignUpForm />
+			</Suspense>
 		</CardAuthWrapper>
 	);
 };
@@ -40,7 +45,9 @@ const SignUpClient = () => {
 const SignInServer = () => {
 	return (
 		<CardAuthWrapper isSignUp>
-			<SignUpFormServer />
+			<Suspense fallback={<SignUpFormSkeleton />}>
+				<SignUpFormServer />
+			</Suspense>
 		</CardAuthWrapper>
 	);
 };

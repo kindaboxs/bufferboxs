@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
@@ -27,7 +27,10 @@ import { signUp } from "@/lib/auth/client";
 export const SignUpForm = () => {
 	const [loading, setLoading] = useState<boolean>(false);
 
+	const searchParams = useSearchParams();
 	const router = useRouter();
+
+	const redirect_to = searchParams.get("redirect_to");
 
 	const form = useForm<signUpSchemaType>({
 		resolver: zodResolver(signUpSchema),
@@ -54,7 +57,11 @@ export const SignUpForm = () => {
 					setLoading(false);
 				},
 				onSuccess: () => {
-					router.push("/sign-in");
+					router.push(
+						redirect_to
+							? `/sign-in?redirect_to=${encodeURIComponent(redirect_to)}`
+							: "/sign-in"
+					);
 					form.reset();
 					toast.success("Account created successfully, please sign in.", {
 						id: "sign-up-success",

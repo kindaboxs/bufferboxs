@@ -1,7 +1,7 @@
 "use client";
 
 import { useTransition } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
@@ -28,7 +28,10 @@ import { Input } from "@/components/ui/input";
 export const SignInFormServer = () => {
 	const [isPending, startTransition] = useTransition();
 
+	const searchParams = useSearchParams();
 	const router = useRouter();
+
+	const redirect_to = searchParams.get("redirect_to");
 
 	const form = useForm<signInSchemaType>({
 		resolver: zodResolver(signInSchema),
@@ -43,7 +46,7 @@ export const SignInFormServer = () => {
 		startTransition(() => {
 			signInUsernameAction(data).then(({ success, error }) => {
 				if (success) {
-					router.push("/");
+					router.push(redirect_to ?? "/");
 					form.reset();
 					toast.success("Signed in successfully.", {
 						id: "sign-in-success",

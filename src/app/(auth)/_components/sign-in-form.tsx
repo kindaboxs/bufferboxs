@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
@@ -27,7 +27,10 @@ import { signIn } from "@/lib/auth/client";
 export const SignInForm = () => {
 	const [loading, setLoading] = useState<boolean>(false);
 
+	const searchParams = useSearchParams();
 	const router = useRouter();
+
+	const redirect_to = searchParams.get("redirect_to");
 
 	const form = useForm<signInSchemaType>({
 		resolver: zodResolver(signInSchema),
@@ -50,7 +53,7 @@ export const SignInForm = () => {
 					setLoading(false);
 				},
 				onSuccess: () => {
-					router.push("/");
+					router.push(redirect_to ?? "/");
 					form.reset();
 					toast.success("Signed in successfully.", {
 						id: "sign-in-success",
