@@ -2,12 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { betterFetch } from "@better-fetch/fetch";
 
+import { env } from "@/env";
 import { Session } from "@/lib/auth/types";
 
-import { env } from "./env";
-
 const authRoutes = ["/sign-in", "/sign-up"];
-const protectedRoutes = ["/admin"];
+const protectedRoutes = ["/admin", "/profile"];
 
 export default async function middleware(req: NextRequest) {
 	const { nextUrl } = req;
