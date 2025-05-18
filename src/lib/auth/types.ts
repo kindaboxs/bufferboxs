@@ -4,3 +4,4 @@ import { authClient as client } from "@/lib/auth/client";
 export type Session = typeof auth.$Infer.Session;
 export type ActiveOrganization = typeof client.$Infer.ActiveOrganization;
 export type Invitation = typeof client.$Infer.Invitation;
+export type AuthErrorCode = keyof typeof auth.$ERROR_CODES;

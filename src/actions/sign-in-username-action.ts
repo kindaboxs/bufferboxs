@@ -14,6 +14,7 @@ import {
 	signInSchemaType,
 } from "@/app/(auth)/_schemas/sign-in-schema";
 import { auth } from "@/lib/auth";
+import { AuthErrorCode } from "@/lib/auth/types";
 
 export const signInUsernameAction = async (data: signInSchemaType) => {
 	const validated = await signInSchema.safeParseAsync(data);
@@ -59,7 +60,11 @@ export const signInUsernameAction = async (data: signInSchemaType) => {
 		return { success: true, error: null };
 	} catch (error) {
 		if (error instanceof APIError) {
-			return { success: false, error: error.message };
+			const errCode = error.body ? (error.body.code as AuthErrorCode) : null;
+			switch (errCode) {
+				default:
+					return { success: false, error: error.message };
+			}
 		}
 
 		return { success: false, error: "Internal Server Error" };
