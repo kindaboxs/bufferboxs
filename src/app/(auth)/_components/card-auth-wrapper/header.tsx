@@ -12,8 +12,8 @@ export function CardAuthWrapperHeader({
 			<CardTitle className="text-2xl">
 				{isSignUp ? "Create your account" : "Welcome back!"}
 			</CardTitle>
-			<CardDescription className="text-base">
-				Connect to <span className="font-semibold">bufferboxs</span> with:
+			<CardDescription>
+				to continue to <span className="font-semibold">bufferboxs</span>
 			</CardDescription>
 		</CardHeader>
 	);

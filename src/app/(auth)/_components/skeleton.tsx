@@ -34,3 +34,13 @@ export const SignUpFormSkeleton = () => {
 		</div>
 	);
 };
+
+export const SocialSignInButtonsSkeleton = () => {
+	return (
+		<div className="grid w-full grid-cols-2 gap-2">
+			{Array.from({ length: 2 }).map((_, index) => (
+				<Skeleton key={index} className="h-8 w-full" />
+			))}
+		</div>
+	);
+};

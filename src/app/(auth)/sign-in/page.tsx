@@ -3,7 +3,12 @@ import { Suspense } from "react";
 import { CardAuthWrapper } from "@/app/(auth)/_components/card-auth-wrapper";
 import { SignInForm } from "@/app/(auth)/_components/sign-in-form";
 import { SignInFormServer } from "@/app/(auth)/_components/sign-in-form-server";
-import { SignInFormSkeleton } from "@/app/(auth)/_components/skeleton";
+import {
+	SignInFormSkeleton,
+	SocialSignInButtonsSkeleton,
+} from "@/app/(auth)/_components/skeleton";
+import { SocialSignInButtons } from "@/app/(auth)/_components/social-sign-in-buttons";
+import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function SignInPage() {
@@ -38,6 +43,14 @@ const SignInClient = () => {
 			<Suspense fallback={<SignInFormSkeleton />}>
 				<SignInForm />
 			</Suspense>
+			<div className="my-6 flex items-center justify-between gap-2">
+				<Separator className="flex-1" />
+				<span className="text-muted-foreground text-sm">or continue with</span>
+				<Separator className="flex-1" />
+			</div>
+			<Suspense fallback={<SocialSignInButtonsSkeleton />}>
+				<SocialSignInButtons />
+			</Suspense>
 		</CardAuthWrapper>
 	);
 };
@@ -47,6 +60,14 @@ const SignInServer = () => {
 		<CardAuthWrapper>
 			<Suspense fallback={<SignInFormSkeleton />}>
 				<SignInFormServer />
+			</Suspense>
+			<div className="my-6 flex items-center justify-between gap-2">
+				<Separator className="flex-1" />
+				<span className="text-muted-foreground text-sm">or continue with</span>
+				<Separator className="flex-1" />
+			</div>
+			<Suspense fallback={<SocialSignInButtonsSkeleton />}>
+				<SocialSignInButtons />
 			</Suspense>
 		</CardAuthWrapper>
 	);
