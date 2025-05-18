@@ -6,7 +6,7 @@ import { env } from "@/env";
 import { Session } from "@/lib/auth/types";
 
 const authRoutes = ["/sign-in", "/sign-up"];
-const protectedRoutes = ["/admin", "/profile"];
+const protectedRoutes = ["/dashboard", "/profile"];
 
 export default async function middleware(req: NextRequest) {
 	const { nextUrl } = req;
